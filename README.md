@@ -4,7 +4,6 @@
 
 ```
 yarn install
-yarn ts
 ```
 
 ## Running an advent day
