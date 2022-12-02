@@ -10,7 +10,7 @@ yarn install
 
 write your files in typescript like this:
 
-`src/day-01.ts`
+`src/day-01/day-01.ts`
 
 ```
 make run-advent-day day=01
