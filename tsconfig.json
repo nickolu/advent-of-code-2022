@@ -1,14 +1,14 @@
-{   
-    "compilerOptions": {
-        "target": "es5",
-        "allowJs": true,
-        "skipLibCheck": true,
-        "strict": false,
-        "module": "commonjs",
-        "baseUrl": ".",
-        "outDir": "compiled",
-        "rootDir": "src"
-    },
-    "include": ["**/*.ts"],
-    "exclude": ["node_modules"]
+{
+  "compilerOptions": {
+    "target": "es5",
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "module": "CommonJS",
+    "baseUrl": ".",
+    "outDir": "compiled",
+    "rootDir": "src"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
 }

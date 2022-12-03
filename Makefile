@@ -12,5 +12,4 @@ print-make-phonies:
 	@grep -E '^[a-z0-9\-]+:' Makefile | cut -d : -f 1 | sort
 
 run-advent-day:
-	yarn tsc src/day-$(day)/index.ts --outfile compiled/day-$(day).js
-	node compiled/day-$(day).js
+	yarn run-day src/day-$(day)/index.ts
