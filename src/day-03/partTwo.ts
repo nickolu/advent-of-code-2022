@@ -2,7 +2,7 @@ const ELF_ITEMS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 export default function partTwo(input) {
   const lines = input.split('\n');
-  console.log('total priority', totalPriority(lines));
+  console.log(totalPriority(lines));
 }
 
 type ElfGroup = string[];
