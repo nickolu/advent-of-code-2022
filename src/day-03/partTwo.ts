@@ -28,7 +28,7 @@ function accumulateTotalPriorityForElfGroups(
 
   if (currentElfGroup.length === 3) {
     elfGroups.push([]);
-    const item = findElfBadge(currentElfGroup);
+    const item = findMatchingItemInElfGroup(currentElfGroup);
     totalPriority += itemPriority(item);
   }
 
@@ -38,27 +38,24 @@ function accumulateTotalPriorityForElfGroups(
   };
 }
 
-function findElfBadge(elfGroup: ElfGroup): string {
-  return findSameLetterInElfGroup(elfGroup);
-}
-
-function itemPriority(item: string) {
-  return ELF_ITEMS.indexOf(item) + 1;
-}
-
-const isLetterInRucksack = (letter, rucksack) =>
-  rucksack.indexOf(letter) !== -1;
-
-function findSameLetterInElfGroup(elfGroup: ElfGroup) {
+function findMatchingItemInElfGroup(elfGroup: ElfGroup) {
   for (let i = 0; i < ELF_ITEMS.length; i++) {
     if (
-      isLetterInRucksack(ELF_ITEMS[i], elfGroup[0]) &&
-      isLetterInRucksack(ELF_ITEMS[i], elfGroup[1]) &&
-      isLetterInRucksack(ELF_ITEMS[i], elfGroup[2])
+      isItemInRucksack(ELF_ITEMS[i], elfGroup[0]) &&
+      isItemInRucksack(ELF_ITEMS[i], elfGroup[1]) &&
+      isItemInRucksack(ELF_ITEMS[i], elfGroup[2])
     ) {
       return ELF_ITEMS[i];
     }
   }
 
   return null;
+}
+
+function itemPriority(item: string) {
+  return ELF_ITEMS.indexOf(item) + 1;
+}
+
+function isItemInRucksack(item, rucksack) {
+  return rucksack.indexOf(item) !== -1;
 }

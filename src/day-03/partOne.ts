@@ -23,13 +23,10 @@ function totalPriority(lines: string[]) {
 }
 
 function findMatchingItemInRucksacks(rucksackA: string, rucksackB: string) {
-  const isLetterInRucksack = (letter, rucksack) =>
-    rucksack.indexOf(letter) !== -1;
-
   for (let i = 0; i < ELF_ITEMS.length; i++) {
     if (
-      isLetterInRucksack(ELF_ITEMS[i], rucksackA) &&
-      isLetterInRucksack(ELF_ITEMS[i], rucksackB)
+      isItemInRucksack(ELF_ITEMS[i], rucksackA) &&
+      isItemInRucksack(ELF_ITEMS[i], rucksackB)
     ) {
       return ELF_ITEMS[i];
     }
@@ -49,4 +46,8 @@ function splitLine(input: string): string[] {
 
 function itemPriority(item: string) {
   return ELF_ITEMS.indexOf(item) + 1;
+}
+
+function isItemInRucksack(item, rucksack) {
+  return rucksack.indexOf(item) !== -1;
 }
