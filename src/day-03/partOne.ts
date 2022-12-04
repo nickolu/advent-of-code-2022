@@ -10,32 +10,19 @@ function totalPriority(lines: string[]) {
   let totalPriority = 0;
 
   lines.forEach((line) => {
-    totalPriority += priorityOfMatchingLetterInRucksacks(line);
+    const rucksacks = splitLine(line);
+    const matchingLetter = findMatchingLetterInRucksacks(
+      rucksacks[0],
+      rucksacks[1]
+    );
+
+    totalPriority += itemPriority(matchingLetter);
   });
 
   return totalPriority;
 }
 
-function priorityOfMatchingLetterInRucksacks(line) {
-  const rucksacks = splitLineToRucksacks(line);
-  const matchingLetter = findSameLetterInRucksacks(rucksacks[0], rucksacks[1]);
-
-  return itemPriority(matchingLetter);
-}
-
-function itemPriority(item: string) {
-  return items.indexOf(item) + 1;
-}
-
-function splitLineToRucksacks(input: string): string[] {
-  const rucksackBStartIndex = Math.floor(input.length / 2);
-  const rucksackA = input.substring(0, rucksackBStartIndex);
-  const rucksackB = input.substring(rucksackBStartIndex, 9999);
-
-  return [rucksackA, rucksackB];
-}
-
-function findSameLetterInRucksacks(rucksackA: string, rucksackB: string) {
+function findMatchingLetterInRucksacks(rucksackA: string, rucksackB: string) {
   const isLetterInRucksack = (letter, rucksack) =>
     rucksack.indexOf(letter) !== -1;
 
@@ -49,4 +36,17 @@ function findSameLetterInRucksacks(rucksackA: string, rucksackB: string) {
   }
 
   return null;
+}
+
+function splitLine(input: string): string[] {
+  const startOfSecondHalf = Math.floor(input.length / 2);
+
+  return [
+    input.substring(0, startOfSecondHalf),
+    input.substring(startOfSecondHalf, 9999),
+  ];
+}
+
+function itemPriority(item: string) {
+  return items.indexOf(item) + 1;
 }
