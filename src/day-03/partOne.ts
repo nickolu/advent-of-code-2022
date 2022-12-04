@@ -1,4 +1,4 @@
-const items = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const ELF_ITEMS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 export default function partOne(input) {
   const lines = input.split('\n');
@@ -11,27 +11,27 @@ function totalPriority(lines: string[]) {
 
   lines.forEach((line) => {
     const rucksacks = splitLine(line);
-    const matchingLetter = findMatchingLetterInRucksacks(
+    const matchingItem = findMatchingItemInRucksacks(
       rucksacks[0],
       rucksacks[1]
     );
 
-    totalPriority += itemPriority(matchingLetter);
+    totalPriority += itemPriority(matchingItem);
   });
 
   return totalPriority;
 }
 
-function findMatchingLetterInRucksacks(rucksackA: string, rucksackB: string) {
+function findMatchingItemInRucksacks(rucksackA: string, rucksackB: string) {
   const isLetterInRucksack = (letter, rucksack) =>
     rucksack.indexOf(letter) !== -1;
 
-  for (let i = 0; i < items.length; i++) {
+  for (let i = 0; i < ELF_ITEMS.length; i++) {
     if (
-      isLetterInRucksack(items[i], rucksackA) &&
-      isLetterInRucksack(items[i], rucksackB)
+      isLetterInRucksack(ELF_ITEMS[i], rucksackA) &&
+      isLetterInRucksack(ELF_ITEMS[i], rucksackB)
     ) {
-      return items[i];
+      return ELF_ITEMS[i];
     }
   }
 
@@ -48,5 +48,5 @@ function splitLine(input: string): string[] {
 }
 
 function itemPriority(item: string) {
-  return items.indexOf(item) + 1;
+  return ELF_ITEMS.indexOf(item) + 1;
 }
