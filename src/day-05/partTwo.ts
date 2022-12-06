@@ -2,7 +2,7 @@ type CrateMap = {
   [index: string]: string[];
 };
 
-export default function partOne(input: string) {
+export default function partTwo(input: string) {
   const [crateDrawing, instructions] = input.split('\n\n');
   const crateMap = transformCrateDrawingToCratesMap(crateDrawing);
 
