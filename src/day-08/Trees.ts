@@ -7,38 +7,43 @@ export default class Trees {
     });
   }
 
-  get rowCount() {
+  get rowCount(): number {
     return this.grid.length;
   }
 
-  get columnCount() {
+  get columnCount(): number {
     return this.grid[0].length;
   }
 
-  getTreeValue(rowIndex, columnIndex) {
+  getTreeValue(rowIndex: number, columnIndex: number): number {
     return this.grid[rowIndex][columnIndex];
   }
 
-  getVisibleTreeCount() {
-    return this.grid.reduce((accumulator, row, rowIndex) => {
-      return row.reduce((accumulator, treeValue, columnIndex) => {
-        if (this.isTreeVisible(rowIndex, columnIndex)) {
-          accumulator++;
-        }
+  getVisibleTreeCount(): number {
+    let totalTrees = 0;
 
-        return accumulator;
-      }, accumulator);
-    }, 0);
+    this.grid.forEach((row, rowIndex) => {
+      row.forEach((treeValue, columnIndex) => {
+        if (this.isTreeVisible(rowIndex, columnIndex)) {
+          totalTrees++;
+        }
+      });
+    });
+
+    return totalTrees;
   }
 
-  isTreeVisible(rowIndex: number, columnIndex: number) {
-    const isEdge =
+  isTreeOnEdge(rowIndex: number, columnIndex: number): boolean {
+    return (
       rowIndex === 0 ||
       columnIndex === 0 ||
       rowIndex === this.rowCount - 1 ||
-      columnIndex === this.columnCount - 1;
+      columnIndex === this.columnCount - 1
+    );
+  }
 
-    if (isEdge) {
+  isTreeVisible(rowIndex: number, columnIndex: number): boolean {
+    if (this.isTreeOnEdge(rowIndex, columnIndex)) {
       return true;
     }
 
@@ -57,17 +62,11 @@ export default class Trees {
     return false;
   }
 
-  getTreeScenicScore(rowIndex: number, columnIndex: number) {
+  getTreeScenicScore(rowIndex: number, columnIndex: number): number {
     const treeRow = this.grid[rowIndex];
     const treeColumn = this.grid.map((row) => row[columnIndex]);
 
-    const isEdge =
-      rowIndex === 0 ||
-      columnIndex === 0 ||
-      rowIndex === this.rowCount - 1 ||
-      columnIndex === this.columnCount - 1;
-
-    if (isEdge) {
+    if (this.isTreeOnEdge(rowIndex, columnIndex)) {
       return 0;
     }
 
@@ -81,24 +80,10 @@ export default class Trees {
       rowIndex
     );
 
-    // console.log(
-    //   'position:',
-    //   columnIndex,
-    //   rowIndex,
-    //   'value:',
-    //   this.getTreeValue(rowIndex, columnIndex),
-    //   'scores:',
-    //   left,
-    //   right,
-    //   up,
-    //   down,
-    //   'scenicScores:',
-    //   left * right * up * down
-    // );
     return left * right * up * down;
   }
 
-  getHighestScenicScore() {
+  getHighestScenicScore(): number {
     let highest = 0;
     this.grid.forEach((row, rowIndex) => {
       row.forEach((tree, columnIndex) => {
@@ -116,12 +101,8 @@ export default class Trees {
 function countVisibleTreesBeforeAndAfterTree(
   trees: number[],
   treeIndex: number
-) {
+): [number, number] {
   const currentTreeValue = trees[treeIndex];
-  //   let isCountingTreesBefore = false;
-  //   let isCountingTreesAfter = false;
-  //   let numberOfTreesBefore = 0;
-  //   let numberOfTreesAfter = 0;
   const lastTreeIndex = trees.length - 1;
   let indexOfViewBefore = 0;
   let indexOfViewAfter = lastTreeIndex;
@@ -139,34 +120,12 @@ function countVisibleTreesBeforeAndAfterTree(
     } else {
       break;
     }
-
-    // if (i < treeIndex) {
-    //   numberOfTreesBefore++;
-    //   if (trees[i] >= currentTreeValue) {
-    //     numberOfTreesBefore = 0;
-    //   }
-    // }
-
-    // if (i === treeIndex) {
-    //   numberOfTreesBefore++;
-    //   isCountingTreesBefore = false;
-    //   isCountingTreesAfter = true;
-    // }
-
-    // if (i > treeIndex) {
-    //   if (trees[i] >= currentTreeValue) {
-    //     isCountingTreesAfter = false;
-    //   }
-    //   if (isCountingTreesAfter) {
-    //     numberOfTreesAfter++;
-    //   }
-    // }
   }
 
   return [treeIndex - indexOfViewBefore, indexOfViewAfter - treeIndex];
 }
 
-function isTreeVisibleInRow(trees: number[], treeIndex: number) {
+function isTreeVisibleInRow(trees: number[], treeIndex: number): boolean {
   const currentTreeValue = trees[treeIndex];
   let tallestTreeBefore = 0;
   let tallestTreeAfter = 0;
