@@ -7,7 +7,7 @@ export default class Rope {
 
   constructor(length: number) {
     this.headNode = new HeadNode();
-    this.tailNodes = getEmptyArray(length - 1).map((_, i) => new TailNode());
+    this.tailNodes = createTailNodes(length - 1);
   }
 
   move(direction: [number, number]) {
@@ -34,6 +34,10 @@ export default class Rope {
   }
 }
 
+function createTailNodes(amount: number) {
+  return Array.from(new Array(amount)).map(() => new TailNode());
+}
+
 export function applyCommandsToRope(commands: string[], rope: Rope) {
   commands.forEach((command) => {
     const [direction, times] = command.split(' ');
@@ -42,8 +46,4 @@ export function applyCommandsToRope(commands: string[], rope: Rope) {
       rope.move(directionValuesMap[direction]);
     });
   });
-}
-
-function getEmptyArray(length: number) {
-  return Array.from(new Array(length));
 }
