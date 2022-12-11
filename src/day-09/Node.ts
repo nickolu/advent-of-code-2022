@@ -37,7 +37,6 @@ abstract class Node {
 export class HeadNode extends Node {}
 export class TailNode extends Node {
   visitedPositions: {[id: string]: NodePosition};
-  previousPosition: NodePosition;
 
   constructor() {
     super();
@@ -45,7 +44,6 @@ export class TailNode extends Node {
     this.visitedPositions = {
       x0y0: startingPosition,
     };
-    this.previousPosition = startingPosition;
   }
 
   get visitedPositionNames() {
