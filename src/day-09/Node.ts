@@ -77,12 +77,6 @@ export class TailNode extends Node {
     this.addVisitedPosition(this.position);
   }
 
-  moveToPosition(position: NodePosition) {
-    this.x = position.x;
-    this.y = position.y;
-    this.addVisitedPosition(position);
-  }
-
   addVisitedPosition(position: NodePosition) {
     const key = `x${position.x}y${position.y}`;
 
