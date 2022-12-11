@@ -40,9 +40,8 @@ export class TailNode extends Node {
 
   constructor() {
     super();
-    const startingPosition = {x: 0, y: 0};
     this.visitedPositions = {
-      x0y0: startingPosition,
+      x0y0: {x: 0, y: 0},
     };
   }
 
