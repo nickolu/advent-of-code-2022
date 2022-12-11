@@ -59,10 +59,9 @@ export class TailNode extends Node {
   visitedPositions: {[id: string]: NodePosition};
   previousPosition: NodePosition;
 
-  constructor({order}: {order?: number}) {
+  constructor() {
     super();
     const startingPosition = {x: 0, y: 0};
-    this.order = order;
     this.visitedPositions = {
       x0y0: startingPosition,
     };

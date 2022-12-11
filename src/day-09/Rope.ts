@@ -7,9 +7,7 @@ export default class Rope {
 
   constructor(length: number) {
     this.headNode = new HeadNode();
-    this.tailNodes = Array.from(new Array(length - 1)).map(
-      (_, i) => new TailNode({order: i})
-    );
+    this.tailNodes = getEmptyArray(length - 1).map((_, i) => new TailNode());
   }
 
   move(direction: [number, number]) {
@@ -24,7 +22,7 @@ export default class Rope {
   }
 
   get visitedPositions() {
-    return Object.keys(this.tailNode)
+    return Object.keys(this.tailNode);
   }
 
   get nodes() {
@@ -44,4 +42,8 @@ export function applyCommandsToRope(commands: string[], rope: Rope) {
       rope.move(directionValuesMap[direction]);
     });
   });
+}
+
+function getEmptyArray(length) {
+  return Array.from(new Array(length - 1));
 }
