@@ -5,30 +5,16 @@ export type NodePosition = {
   y: number;
 };
 
-type DirectionValue = [number, number];
-
 export const directionValuesMap = {
   U: [0, 1],
   D: [0, -1],
   L: [-1, 0],
   R: [1, 0],
-  LU: [-1, 1],
-  LD: [-1, -1],
-  RU: [1, 1],
-  RD: [1, -1],
 };
-
-const perpendicularDirectionValues = [
-  directionValuesMap.U,
-  directionValuesMap.D,
-  directionValuesMap.L,
-  directionValuesMap.R,
-];
 
 abstract class Node {
   x: number;
   y: number;
-  order?: number;
 
   constructor() {
     this.x = 0;
@@ -48,13 +34,7 @@ abstract class Node {
   }
 }
 
-export class HeadNode extends Node {
-  constructor() {
-    super();
-    this.order = 0;
-  }
-}
-
+export class HeadNode extends Node {}
 export class TailNode extends Node {
   visitedPositions: {[id: string]: NodePosition};
   previousPosition: NodePosition;

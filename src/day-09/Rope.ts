@@ -44,6 +44,6 @@ export function applyCommandsToRope(commands: string[], rope: Rope) {
   });
 }
 
-function getEmptyArray(length) {
-  return Array.from(new Array(length - 1));
+function getEmptyArray(length: number) {
+  return Array.from(new Array(length));
 }

@@ -1,4 +1,3 @@
-import _ = require('lodash');
 import Rope, {applyCommandsToRope} from './Rope';
 
 export default function partOne(input: string) {
