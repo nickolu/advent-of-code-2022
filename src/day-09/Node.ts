@@ -1,5 +1,3 @@
-import {over} from 'lodash';
-
 export type NodePosition = {
   x: number;
   y: number;
