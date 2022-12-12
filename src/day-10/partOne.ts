@@ -1,5 +1,3 @@
-import _ = require('lodash');
-
 enum Command {
   addx = 'addx',
   noop = 'noop',
